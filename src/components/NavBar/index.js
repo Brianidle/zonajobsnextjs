@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
-import OptionButton from "../Buttons/OptionButton";
-import LogInButton from "../Buttons/LogInButton";
-import PublishButton from "../Buttons/PublishButton";
+import CompanyButton from "./NavButtonButtons/CompanyButton";
+import ExecutivePositionsButton from "./NavButtonButtons/ExecutivPositionsButton";
+import LogInNSignInButton from "./NavButtonButtons/LogInNSignInButton";
+import NewsBlogButton from "./NavButtonButtons/NewsBlogButton";
+import PublishForFreeButton from "./NavButtonButtons/PublishForFreeButton";
 
 import classes from "./navBar.module.css";
 
@@ -78,27 +80,17 @@ const NavBar = () => {
       </PageLogoButton>
       <NavButtons>
         <OptionButtonsContainer>
-          <OptionButton className={classes.navBarButton}>
-            PUESTOS EJECUTIVOS
-          </OptionButton>
-          <OptionButton className={classes.navBarButton}>
-            BLOG DE NOTICIAS
-          </OptionButton>
-          <OptionButton className={classes.navBarButton}>
-            SOY EMPRESA
-          </OptionButton>
+          <ExecutivePositionsButton className={classes.navBarButton} />
+          <NewsBlogButton className={classes.navBarButton} />
+          <CompanyButton className={classes.navBarButton} />
         </OptionButtonsContainer>
         <SpecialButtonsContainer>
-          <PublishButton
+          <PublishForFreeButton
             className={classes.navBarButton + " " + classes.navBarPublishButton}
-          >
-            PUBLICAR GRATIS
-          </PublishButton>
-          <LogInButton
+          ></PublishForFreeButton>
+          <LogInNSignInButton
             className={classes.navBarButton + " " + classes.navBarLogInButton}
-          >
-            INGRESAR
-          </LogInButton>
+          ></LogInNSignInButton>
         </SpecialButtonsContainer>
       </NavButtons>
       <NavBarSeparator />
