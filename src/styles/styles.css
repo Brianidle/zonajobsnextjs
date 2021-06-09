@@ -1,0 +1,13 @@
+body {
+  margin: 0px;
+  min-width: 280px;
+  background-color: #f5f5f5;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+}

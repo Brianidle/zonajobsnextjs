@@ -1,0 +1,16 @@
+.navBarButton {
+  margin-right: 15px;
+  border-radius: 20px;
+}
+
+.navBarButton:last-child {
+  margin-right: 0px;
+}
+
+.navBarPublishButton {
+  border: 1px solid #585992;
+}
+
+.navBarLogInButton {
+  border: 1px solid #fe633f;
+}
