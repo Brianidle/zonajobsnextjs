@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import CompanyButton from "./NavButtonButtons/CompanyButton";
@@ -5,6 +6,8 @@ import ExecutivePositionsButton from "./NavButtonButtons/ExecutivPositionsButton
 import LogInNSignInButton from "./NavButtonButtons/LogInNSignInButton";
 import NewsBlogButton from "./NavButtonButtons/NewsBlogButton";
 import PublishForFreeButton from "./NavButtonButtons/PublishForFreeButton";
+
+import DropDownNavBar from "../Dropdowns/DropDownNavBar";
 
 import classes from "./navBar.module.css";
 
@@ -54,6 +57,13 @@ const NavBarSeparator = styled.div`
   }
 `;
 
+const DropDownContainer = styled.div`
+  position: absolute;
+  background-color: white;
+  top: 50px;
+  right: 30px;
+`;
+
 const DropdownButton = styled.button`
   display: none;
   height: 40px;
@@ -73,6 +83,8 @@ const DropdownButton = styled.button`
 `;
 
 const NavBar = () => {
+  const [dropdownOpened, setDropdownOpened] = useState(false);
+
   return (
     <NavigationBar>
       <PageLogoButton href="/">
@@ -80,9 +92,15 @@ const NavBar = () => {
       </PageLogoButton>
       <NavButtons>
         <OptionButtonsContainer>
-          <ExecutivePositionsButton className={classes.navBarButton} />
-          <NewsBlogButton className={classes.navBarButton} />
-          <CompanyButton className={classes.navBarButton} />
+          <ExecutivePositionsButton
+            className={classes.navBarButton + " " + classes.navBarOptionButton}
+          />
+          <NewsBlogButton
+            className={classes.navBarButton + " " + classes.navBarOptionButton}
+          />
+          <CompanyButton
+            className={classes.navBarButton + " " + classes.navBarOptionButton}
+          />
         </OptionButtonsContainer>
         <SpecialButtonsContainer>
           <PublishForFreeButton
@@ -94,7 +112,7 @@ const NavBar = () => {
         </SpecialButtonsContainer>
       </NavButtons>
       <NavBarSeparator />
-      <DropdownButton>
+      <DropdownButton onClick={() => setDropdownOpened(!dropdownOpened)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -108,6 +126,11 @@ const NavBar = () => {
           />
         </svg>
       </DropdownButton>
+      {dropdownOpened && (
+        <DropDownContainer>
+          <DropDownNavBar />
+        </DropDownContainer>
+      )}
     </NavigationBar>
   );
 };

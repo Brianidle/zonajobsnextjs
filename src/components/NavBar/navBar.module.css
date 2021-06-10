@@ -7,10 +7,16 @@
   margin-right: 0px;
 }
 
+.navBarOptionButton {
+  padding: 10px 5px;
+}
+
 .navBarPublishButton {
   border: 1px solid #585992;
+  padding: 10px 20px;
 }
 
 .navBarLogInButton {
   border: 1px solid #fe633f;
+  padding: 10px 20px;
 }

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const LogInButton = styled.a`
-  padding: 10px 20px;
   color: #fe633f;
 
   :hover {
