@@ -24,6 +24,10 @@ const Header = styled.header`
   background-color: white;
 `;
 
+const Main = styled.main`
+  padding-top: 58px;
+`;
+
 const Layout = (props) => {
   return (
     <>
@@ -32,7 +36,7 @@ const Layout = (props) => {
           <NavBar />
         </NavContainer>
       </Header>
-      <main>{props.children}</main>
+      <Main>{props.children}</Main>
     </>
   );
 };
