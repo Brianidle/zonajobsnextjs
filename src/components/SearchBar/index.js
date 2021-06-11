@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import { useState } from "react";
+
+import DropDownSearchSection from "../Dropdowns/DropDownSearchSection";
+
+import classes from "./SearchBar.module.css";
 
 const SearchBarContent = styled.div`
   display: inline-flex;
@@ -8,7 +13,6 @@ const SearchBarContent = styled.div`
   height: 40px;
   background-color: white;
   border-radius: 20px;
-  margin: auto 0px;
 `;
 
 const JobInput = styled.input`
@@ -33,11 +37,13 @@ const LocationSearchBar = styled.div`
   flex-direction: row;
   align-items: center;
   margin-left: 5px;
+  position: relative;
 `;
 
 const LocationBarLabel = styled.label`
   color: #aeadae;
   flex-shrink: 0;
+  font-weight: 600;
 `;
 
 const LocationInput = styled.input`
@@ -78,14 +84,21 @@ const SearchButton = styled.button`
 `;
 
 const SearchBar = () => {
+  const [dropDownOpened, setDropDownOpened] = useState(false);
+
+  const onClickDropDown = () => setDropDownOpened(!dropDownOpened);
+
   return (
     <SearchBarContent>
       <JobInput placeholder="Puesto, Empresa, o Palabra Clave" />
       <SearchBarSeparator>|</SearchBarSeparator>
       <LocationSearchBar>
         <LocationBarLabel> En: </LocationBarLabel>
-        <LocationInput placeholder="Lugar de Trabajo" />
-        <DropdownButton>
+        <LocationInput
+          onClick={onClickDropDown}
+          placeholder="Lugar de Trabajo"
+        />
+        <DropdownButton onClick={onClickDropDown}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -107,6 +120,10 @@ const SearchBar = () => {
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
           </svg>
         </SearchButton>
+
+        {dropDownOpened && (
+          <DropDownSearchSection className={classes.searchSectionDropDown} />
+        )}
       </LocationSearchBar>
     </SearchBarContent>
   );
