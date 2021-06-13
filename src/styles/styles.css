@@ -23,3 +23,7 @@ ul {
 li {
   cursor: pointer;
 }
+
+* {
+  font-family: Montserrat, Arial, sans-serif;
+}
