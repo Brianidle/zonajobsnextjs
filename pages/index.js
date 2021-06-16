@@ -72,19 +72,7 @@ const JobAdsSection = styled.div`
   margin-left: 15px;
 `;
 
-const HomePage = () => {
-  const jobAdExample = {
-    publishDay: "2021-05-13T20:06:15.172+00:00",
-    srcImage:
-      "https://imgzj.jobscdn.com/portal/img/empresas/1/static/logoMainPic_243558_bum_vc7d6ba60.jpg",
-    jobTitle: "JEFE DE EQUIPO COMERCIAL-ALARMAS",
-    companyNmae: "Prosegur SA",
-    state: "Buenos Aires",
-    city: "Capital Federal",
-    jobDescription:
-      "Prosegur es un referente global del sector de la seguridad privada. A través de sus cinco líneas de negocio —Prosegur Seguridad, Prosegur Cash, Prosegur Alarmas, Cipher y Prosegur AVOS— proporciona a empresas, hogares y comercios, una seguridad de confianza basada en las soluciones más avanzadas del mercado. Con ...",
-  };
-
+const HomePage = ({ jobAds }) => {
   return (
     <>
       <SearchSectionImageBackground>
@@ -104,20 +92,28 @@ const HomePage = () => {
             <FeaturedJobsTitle>
               Empleos destacados en <strong>Argentina</strong>
             </FeaturedJobsTitle>
-            <JobAds
-              jobs={[
-                jobAdExample,
-                jobAdExample,
-                jobAdExample,
-                jobAdExample,
-                jobAdExample,
-              ]}
-            />
+            <JobAds jobs={jobAds} />
           </JobAdsSection>
         </JobSectionContent>
       </JobSection>
     </>
   );
 };
+
+export async function getStaticProps() {
+  let res = await fetch(process.env.API_PATH, {
+    method: "get",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  let jobAds = await res.json();
+
+  return {
+    props: { jobAds },
+  };
+}
 
 export default HomePage;

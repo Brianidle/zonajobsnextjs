@@ -12,7 +12,7 @@ const JobAds = ({ jobs }) => {
   return (
     <JobAdsContent>
       {jobs.map((job) => (
-        <JobAd job={job} />
+        <JobAd job={job} key={job._id} />
       ))}
     </JobAdsContent>
   );

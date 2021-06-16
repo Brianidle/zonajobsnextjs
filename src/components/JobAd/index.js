@@ -24,11 +24,13 @@ const JobCompanyLogoImage = styled.img`
 
 const JobTitle = styled.a`
   display: block;
-  overflow: hidden;
   margin: 0px;
   margin-bottom: 10px;
   color: #3a3a3a;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const CompanyName = styled.a`
@@ -70,13 +72,13 @@ const JobAd = ({ job }) => {
     <JobAdContent>
       <PublishedAgoSpan>publicado el 12 de mayo</PublishedAgoSpan>
       <JobDescriptionContent>
-        <JobCompanyLogoImage src={job.srcImage} />
-        <JobTitle>{job.jobTitle}</JobTitle>
+        {job.urlCompanyLogo && <JobCompanyLogoImage src={job.urlCompanyLogo} />}
+        <JobTitle>{job.title}</JobTitle>
         <CompanyName href="/">{job.companyName}</CompanyName>
         <JobLocation>
           <label>{job.city}</label>, <label>{job.state}</label>
         </JobLocation>
-        <JobDescription>{job.jobDescription}</JobDescription>
+        <JobDescription>{job.description}</JobDescription>
       </JobDescriptionContent>
     </JobAdContent>
   );
