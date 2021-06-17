@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import moment from "moment";
+
 const PublishedAgoSpan = styled.p`
   text-transform: uppercase;
   float: right;
@@ -22,7 +24,7 @@ const JobCompanyLogoImage = styled.img`
   float: right;
 `;
 
-const JobTitle = styled.a`
+const JobTitle = styled.div`
   display: block;
   margin: 0px;
   margin-bottom: 10px;
@@ -33,7 +35,7 @@ const JobTitle = styled.a`
   text-overflow: ellipsis;
 `;
 
-const CompanyName = styled.a`
+const CompanyName = styled.div`
   display: block;
   margin-bottom: 5px;
   font-size: 13px;
@@ -70,11 +72,14 @@ const JobAdContent = styled.a`
 const JobAd = ({ job }) => {
   return (
     <JobAdContent href={"/empleos/" + job._id}>
-      <PublishedAgoSpan>publicado el 12 de mayo</PublishedAgoSpan>
+      {}
+      <PublishedAgoSpan>
+        publicado el {moment(job.createdAt, "YYYYMMDD").format("LL")}
+      </PublishedAgoSpan>
       <JobDescriptionContent>
         {job.urlCompanyLogo && <JobCompanyLogoImage src={job.urlCompanyLogo} />}
         <JobTitle>{job.title}</JobTitle>
-        <CompanyName href="/">{job.companyName}</CompanyName>
+        <CompanyName>{job.companyName}</CompanyName>
         <JobLocation>
           <label>{job.city}</label>, <label>{job.state}</label>
         </JobLocation>

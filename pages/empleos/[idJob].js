@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import moment from "moment";
 
 import JobFeature from "../../src/components/JobFeature";
 
@@ -67,7 +68,9 @@ const JobDetailPage = ({ job }) => {
             ></JobFeature>
             <JobFeature
               featureName="PUBLICADO"
-              featureValue="Publicado el 14 de junio"
+              featureValue={
+                "Publicado el " + moment(job.createdAt, "YYYYMMDD").format("LL")
+              }
             ></JobFeature>
             <JobFeature
               featureName="SUELDO"
