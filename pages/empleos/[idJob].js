@@ -32,7 +32,7 @@ const LogoCompanyDiv = styled.div`
   position: absolute;
   right: ${paddingRightNLef};
   top: 30px;
-  padding: 5px;
+  padding: 5px 5px 1px 5px;
   background-color: white;
   border: 1px solid #fe633f;
 `;

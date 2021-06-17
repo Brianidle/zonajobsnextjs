@@ -60,7 +60,7 @@ const JobDescription = styled.p`
   font-size: 14px;
 `;
 
-const JobAdContent = styled.div`
+const JobAdContent = styled.a`
   width: 100%;
   background-color: #fff;
   color: gray;
@@ -69,7 +69,7 @@ const JobAdContent = styled.div`
 
 const JobAd = ({ job }) => {
   return (
-    <JobAdContent>
+    <JobAdContent href={"/empleos/" + job._id}>
       <PublishedAgoSpan>publicado el 12 de mayo</PublishedAgoSpan>
       <JobDescriptionContent>
         {job.urlCompanyLogo && <JobCompanyLogoImage src={job.urlCompanyLogo} />}
