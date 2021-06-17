@@ -4,6 +4,8 @@ import styled from "styled-components";
 import NavForFiltering from "../src/components/NavForFiltering";
 import JobAds from "../src/components/JobAds";
 
+import { getAllJobAds } from "../src/apiHelper/JobAd";
+
 const SearchSectionImageBackground = styled.div`
   background-image: url(https://imgzj.jobscdn.com/postulantes-assets/skins/zonajobs/postulantes-desktop/img/zj_portada_site.jpg);
   background-size: cover;
@@ -101,15 +103,7 @@ const HomePage = ({ jobAds }) => {
 };
 
 export async function getStaticProps() {
-  let res = await fetch(process.env.API_PATH, {
-    method: "get",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
-
-  let jobAds = await res.json();
+  let jobAds = await getAllJobAds();
 
   return {
     props: { jobAds },

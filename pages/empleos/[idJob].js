@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 import JobFeature from "../../src/components/JobFeature";
 
+import { getAllJobAds, getJobAd } from "../../src/apiHelper/JobAd";
+
 const paddingRightNLef = "20px";
 
 const JobDetailContent = styled.div`
@@ -46,22 +48,22 @@ const JobDescription = styled.div`
   margin-top: 20px;
 `;
 
-const JobDetailPage = () => {
+const JobDetailPage = ({ job }) => {
   return (
     <>
       <JobDetailContent>
         <JobTitleNCompanyNameDiv>
-          <JobTitle>Ingeniero especializado en mantenimiento</JobTitle>
-          <CompanyName>FATE</CompanyName>
+          <JobTitle>{job.title}</JobTitle>
+          <CompanyName>{job.companyName}</CompanyName>
           <LogoCompanyDiv>
-            <img src="https://imgzj.jobscdn.com/portal/img/empresas/1/static/logoMainPic_51738_bum_v81e44af0.jpg" />
+            <img src={job.urlCompanyLogo} />
           </LogoCompanyDiv>
         </JobTitleNCompanyNameDiv>
         <JobDescriptionDiv>
           <div>
             <JobFeature
               featureName="LUGAR DE TRABAJO"
-              featureValue="San Fernando, Buenos Aires"
+              featureValue={job.city + ", " + job.state}
             ></JobFeature>
             <JobFeature
               featureName="PUBLICADO"
@@ -69,56 +71,43 @@ const JobDetailPage = () => {
             ></JobFeature>
             <JobFeature
               featureName="SUELDO"
-              featureValue="No especificado"
+              featureValue={jobSalary(job.salary)}
             ></JobFeature>
             <JobFeature
               featureName="TIPO DE PUESTO"
-              featureValue="Full-time"
+              featureValue={job.jobType}
             ></JobFeature>
-            <JobFeature
-              featureName="ÁREA"
-              featureValue="Mantenimiento"
-            ></JobFeature>
+            <JobFeature featureName="ÁREA" featureValue={job.area}></JobFeature>
             <JobFeature
               featureName="MODALIDAD DE TRABAJO"
-              featureValue="Presencial"
+              featureValue={job.modality}
             ></JobFeature>
           </div>
-          <JobDescription>
-            Para importante multinacional del rubro lácteos, ubicada en Virrey
-            del Pino, nos encontramos en la búsqueda de un Ingeniero de
-            Proyectos : Serán sus principales responsabilidades: · Desarrollo e
-            implementación de proyectos de inversión industrial (CAPEX) y
-            control de avance de los mismos. · Gestión y control de
-            documentación técnica. · Interacción con las áreas de producción,
-            mantenimiento, sistemas, calidad, seguridad, proveedores externos,
-            entre otros, para coordinar actividades solicitadas en las
-            implementaciones. · Planificación del trabajo que se debe realizar
-            para cumplir las necesidades del Proyecto, según gestión de alcance,
-            tiempo e integración. · Organizar el trabajo de los equipos de
-            proyecto, evaluar las tareas y actividades realizadas, personas y
-            recursos, según los planes establecidos. · Cumplimiento de
-            objetivos, participacion en reuniones para gestionar el Proyecto y
-            mediar la comunicación entre equipos. · Confeccion de informes sobre
-            el estado del proyecto. · Brindar soporte técnico para la
-            implementación de proyectos en otras plantas. Son requisitos: ·
-            Grado en Ingeniería General, Tecnológica, Mecánica o Industrial.
-            Postgrado o Certificación en gestión de proyectos (PMP, Prince) · 5
-            años de experiencia en proyectos líderes, relacionados con la
-            industria, en el entorno industrial de alimentos y bebidas (o
-            farmacéutico) · Experiencia en proyectos de tecnología industrial
-            (automatización, mecánica, tubería) · Conocimiento de Lean
-            Manufacturing (5S, TPM, Autonomous Maintenance, SMED, etc) –
-            (deseable) · Conocimiento de las normas ISO 9000 / GMP (deseable) ·
-            Conocimiento Microsoft Office, ERP (SAP) y AutoCAD. · Idioma inglés
-            (excluyente) · Movilidad propia La compañía ofrece muy buenas
-            condiciones de contratación y beneficios. Horario laboral: de Lunes
-            a Viernes de 08.30 a 17.00 hs
-          </JobDescription>
+          <JobDescription>{job.description}</JobDescription>
         </JobDescriptionDiv>
       </JobDetailContent>
     </>
   );
 };
+
+const jobSalary = (salary) => {
+  return salary ? salary : "No especificado";
+};
+
+export async function getStaticPaths() {
+  let jobAds = await getAllJobAds();
+
+  const paths = jobAds.map((jobAd) => ({
+    params: { idJob: jobAd._id },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  let job = await getJobAd(params.idJob);
+
+  return { props: { job } };
+}
 
 export default JobDetailPage;
