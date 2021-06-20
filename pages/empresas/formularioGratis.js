@@ -227,7 +227,6 @@ const FormularioGratis = () => {
                 name="salary"
                 onChange={onChange}
                 value={inputValues.salary ?? ""}
-                required
               ></Input>
             </div>
             <div>
