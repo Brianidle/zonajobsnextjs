@@ -13,15 +13,35 @@ const SearchBarContent = styled.div`
   height: 40px;
   background-color: white;
   border-radius: 20px;
+
+  @media (max-width: 615px) {
+    flex-direction: column;
+    background-color: transparent;
+    height: unset;
+    padding: 0px;
+  }
 `;
 
-const JobInput = styled.input`
+const SearchInput = styled.input`
   background-color: transparent;
   border: 0px;
   min-width: 205px;
   width: 100%;
   height: 32px;
   margin-left: 10px;
+
+  @media (max-width: 615px) {
+    height: 40px;
+    width: 100%;
+    max-width: unset;
+    min-width: unset;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    background-color: white;
+    padding: 0px;
+    text-indent: 15px;
+    margin-left: 0px;
+  }
 `;
 
 const SearchBarSeparator = styled.div`
@@ -30,6 +50,10 @@ const SearchBarSeparator = styled.div`
   font-weight: 900;
   position: relative;
   bottom: 3px;
+
+  @media (max-width: 615px) {
+    display: none;
+  }
 `;
 
 const LocationSearchBar = styled.div`
@@ -38,12 +62,26 @@ const LocationSearchBar = styled.div`
   align-items: center;
   margin-left: 5px;
   position: relative;
+
+  @media (max-width: 615px) {
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    padding: 0px;
+    background-color: white;
+    margin-left: 0px;
+  }
 `;
 
 const LocationBarLabel = styled.label`
   color: #aeadae;
   flex-shrink: 0;
   font-weight: 600;
+
+  @media (max-width: 615px) {
+    margin-left: 15px;
+  }
 `;
 
 const LocationInput = styled.input`
@@ -53,6 +91,11 @@ const LocationInput = styled.input`
   padding: 0px 8px;
   margin-right: 2px;
   min-width: 180px;
+
+  @media (max-width: 615px) {
+    min-width: unset;
+    width: 100%;
+  }
 `;
 
 const DropdownButton = styled.button`
@@ -90,7 +133,7 @@ const SearchBar = () => {
 
   return (
     <SearchBarContent>
-      <JobInput placeholder="Puesto, Empresa, o Palabra Clave" />
+      <SearchInput placeholder="Puesto, Empresa, o Palabra Clave" />
       <SearchBarSeparator>|</SearchBarSeparator>
       <LocationSearchBar>
         <LocationBarLabel> En: </LocationBarLabel>

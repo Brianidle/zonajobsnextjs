@@ -27,6 +27,10 @@ const SearchSection = styled.div`
   width: 1170px;
   height: 235px;
   margin: 0px auto;
+
+  @media (max-width: 1250px) {
+    width: 95%;
+  }
 `;
 
 const JobSection = styled.div`
