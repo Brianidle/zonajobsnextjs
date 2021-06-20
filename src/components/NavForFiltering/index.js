@@ -5,6 +5,11 @@ const NavForFilteringContent = styled.div`
   background-color: white;
   padding: 0px 10px;
   flex-shrink: 0;
+  height: 100%;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 const NavForFiltering = ({ filterGroupName }) => {

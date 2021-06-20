@@ -4,7 +4,7 @@ import styled from "styled-components";
 import NavForFiltering from "../src/components/NavForFiltering";
 import JobAds from "../src/components/JobAds";
 
-import { getAllJobAds } from "../src/apiHelper/JobAd";
+import { getFeaturedJobs } from "../src/apiHelper/JobAd";
 
 const SearchSectionImageBackground = styled.div`
   background-image: url(https://imgzj.jobscdn.com/postulantes-assets/skins/zonajobs/postulantes-desktop/img/zj_portada_site.jpg);
@@ -37,6 +37,10 @@ const JobSection = styled.div`
   width: 1170px;
   margin: 0px auto;
   background-color: #f5f5f5;
+
+  @media (max-width: 1250px) {
+    width: 95%;
+  }
 `;
 
 const JobSectionHeader = styled.div`
@@ -60,6 +64,11 @@ const AllCountryAdsLabel = styled.label`
   font-weight: 600;
   text-transform: uppercase;
   color: #585992;
+
+  @media (max-width: 615px) {
+    width: 150px;
+    text-align: center;
+  }
 `;
 
 const JobSectionContent = styled.div`
@@ -67,15 +76,19 @@ const JobSectionContent = styled.div`
   flex-direction: row;
 `;
 
-const FeaturedJobsTitle = styled.p`
+const FeaturedJobsTitle = styled.label`
+  display: inline-block;
   font-size: 26px;
   margin-bottom: 15px;
-  margin-top: 0px;
 `;
 
 const JobAdsSection = styled.div`
-  height: 800px;
   margin-left: 15px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    margin-left: unset;
+  }
 `;
 
 const HomePage = ({ jobAds }) => {
@@ -107,7 +120,7 @@ const HomePage = ({ jobAds }) => {
 };
 
 export async function getStaticProps() {
-  let jobAds = await getAllJobAds();
+  let jobAds = await getFeaturedJobs();
 
   return {
     props: { jobAds },

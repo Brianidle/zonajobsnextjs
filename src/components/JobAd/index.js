@@ -63,10 +63,13 @@ const JobDescription = styled.p`
 `;
 
 const JobAdContent = styled.a`
+  box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
   background-color: #fff;
   color: gray;
   border: 1px solid rgba(144, 144, 144, 0.5);
+  min-width: 0px;
 `;
 
 const JobAd = ({ job }) => {
@@ -83,10 +86,14 @@ const JobAd = ({ job }) => {
         <JobLocation>
           <label>{job.city}</label>, <label>{job.state}</label>
         </JobLocation>
-        <JobDescription>{job.description}</JobDescription>
+        <JobDescription>{removeTags(job.description) + " ..."}</JobDescription>
       </JobDescriptionContent>
     </JobAdContent>
   );
+};
+
+const removeTags = (htmlString) => {
+  return htmlString.replace(/(<([^>]+)>)/gi, "");
 };
 
 export default JobAd;
