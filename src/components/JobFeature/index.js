@@ -4,7 +4,6 @@ const JobFeatureContainer = styled.div`
   display: inline-block;
   width: 100%;
   max-width: 250px;
-  @media (max-width: );
 `;
 
 const FeatureName = styled.p`
