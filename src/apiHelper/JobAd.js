@@ -25,3 +25,17 @@ export const getJobAd = async (id) => {
 
   return jobAd;
 };
+
+export const getFeaturedJobs = async () => {
+  let res = await fetch(process.env.API_PATH + "/jobAd/featuredJobs", {
+    method: "get",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  let jobAds = await res.json();
+
+  return jobAds;
+};
