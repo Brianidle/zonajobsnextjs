@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import moment from "moment";
+import parse from "html-react-parser";
 
 import JobFeature from "../../src/components/JobFeature";
 
@@ -86,7 +87,7 @@ const JobDetailPage = ({ job }) => {
               featureValue={job.modality}
             ></JobFeature>
           </div>
-          <JobDescription>{job.description}</JobDescription>
+          <JobDescription>{parse(job.description)}</JobDescription>
         </JobDescriptionDiv>
       </JobDetailContent>
     </>
