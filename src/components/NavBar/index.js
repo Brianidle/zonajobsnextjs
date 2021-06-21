@@ -105,6 +105,7 @@ const NavBar = () => {
         <SpecialButtonsContainer>
           <PublishForFreeButton
             className={classes.navBarButton + " " + classes.navBarPublishButton}
+            href="/empresas/formularioGratis"
           ></PublishForFreeButton>
           <LogInNSignInButton
             className={classes.navBarButton + " " + classes.navBarLogInButton}
