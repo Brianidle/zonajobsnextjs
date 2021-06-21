@@ -7,7 +7,7 @@ const JobFeatureContainer = styled.div`
 `;
 
 const FeatureName = styled.p`
-  font-size: 11px;
+  font-size: 12px;
   color: #8c8c8c;
   font-weight: 400;
   text-transform: uppercase;
@@ -17,7 +17,7 @@ const FeatureName = styled.p`
 
 const FeatureValue = styled.p`
   margin: 0px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
 `;
 

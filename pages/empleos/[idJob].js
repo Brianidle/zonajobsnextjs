@@ -30,18 +30,28 @@ const CompanyName = styled.p`
   margin: 10px 0px;
 `;
 
-const LogoCompanyDiv = styled.div`
+const LogoCompany = styled.img`
+  display: block;
+  width: 100%;
+  max-width: 16%;
+  min-width: 110px;
+  height: auto;
   position: absolute;
   right: ${paddingRightNLef};
-  top: 30px;
-  padding: 5px 5px 1px 5px;
+  top: 65px;
+  padding: 5px;
   background-color: white;
   border: 1px solid #fe633f;
+
+  @media (max-width: 556px){
+    top:100px;
+  }
 `;
 
 const JobDescriptionDiv = styled.div`
   background-color: white;
   padding: 20px ${paddingRightNLef};
+  font-size: 15px;
 `;
 
 const JobDescription = styled.div`
@@ -57,9 +67,7 @@ const JobDetailPage = ({ job }) => {
         <JobTitleNCompanyNameDiv>
           <JobTitle>{job.title}</JobTitle>
           <CompanyName>{job.companyName}</CompanyName>
-          <LogoCompanyDiv>
-            <img src={job.urlCompanyLogo} />
-          </LogoCompanyDiv>
+            <LogoCompany src={job.urlCompanyLogo} />
         </JobTitleNCompanyNameDiv>
         <JobDescriptionDiv>
           <div>
