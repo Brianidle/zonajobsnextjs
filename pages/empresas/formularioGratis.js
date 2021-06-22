@@ -104,13 +104,14 @@ const FormularioGratis = () => {
     companyName: "",
   });
 
+  const [salaryInputDisable, setSalaryInputDisable] = useState(false);
+
   const onChange = (event) => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value });
   };
 
   const onChangeCKEditor = (ckeditorData) => {
     setInputValues({ ...inputValues, [ckeditorData.name]: ckeditorData.data });
-    console.log(inputValues);
   };
 
   const router = useRouter();
@@ -125,6 +126,7 @@ const FormularioGratis = () => {
         <FormContainer
           onSubmit={(e) => {
             e.preventDefault();
+
             fetch("http://localhost:4862/jobAd", {
               method: "post",
               headers: {
@@ -227,7 +229,10 @@ const FormularioGratis = () => {
                 name="salary"
                 onChange={onChange}
                 value={inputValues.salary ?? ""}
+                disabled={salaryInputDisable}
               ></Input>
+              <input id="salaryCheckbox" type="checkbox" onClick={() => { setInputValues({ ...inputValues, salary: "" }); setSalaryInputDisable(!salaryInputDisable) }}
+                style={{ margin: "10px 5px 0px 0px" }} /><label htmlFor="salaryCheckbox">No especificado</label>
             </div>
             <div>
               <InputDescription htmlFor="jobType">
