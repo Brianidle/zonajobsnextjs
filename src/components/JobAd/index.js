@@ -22,6 +22,7 @@ const JobCompanyLogoImage = styled.img`
   width: 90px;
   height: 57px;
   float: right;
+  padding-left: 10px;
 `;
 
 const JobTitle = styled.div`
@@ -64,18 +65,22 @@ const JobDescription = styled.p`
 
 const JobAdContent = styled.a`
   box-sizing: border-box;
-  box-sizing: border-box;
   width: 100%;
   background-color: #fff;
   color: gray;
   border: 1px solid rgba(144, 144, 144, 0.5);
   min-width: 0px;
+
+  transition-duration: 150ms;
+
+  :hover{
+    box-shadow: 0 0 4px 4px rgb(255 161 100 / 60%);
+  }
 `;
 
 const JobAd = ({ job }) => {
   return (
     <JobAdContent href={"/empleos/" + job._id}>
-      {}
       <PublishedAgoSpan>
         publicado el {moment(job.createdAt, "YYYYMMDD").format("LL")}
       </PublishedAgoSpan>

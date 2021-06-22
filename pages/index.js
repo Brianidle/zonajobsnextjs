@@ -78,7 +78,7 @@ const JobSectionContent = styled.div`
 
 const FeaturedJobsTitle = styled.label`
   display: inline-block;
-  font-size: 26px;
+  font-size: 24px;
   margin-bottom: 15px;
 `;
 
