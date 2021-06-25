@@ -98,7 +98,7 @@ const FormularioGratis = () => {
     country: "Argentina",
     state: "",
     city: "",
-    address: "Dirección 1",
+    address: "",
     salary: "",
     modality: "",
     companyName: "",
