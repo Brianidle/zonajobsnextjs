@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import moment from "moment";
 import parse from "html-react-parser";
+import Head from "next/head";
 
 import JobFeature from "../../src/components/JobFeature";
 
@@ -63,11 +64,14 @@ const JobDescription = styled.div`
 const JobDetailPage = ({ job }) => {
   return (
     <>
+      <Head>
+        <title>{job.title}</title>
+      </Head>
       <JobDetailContent>
         <JobTitleNCompanyNameDiv>
           <JobTitle>{job.title}</JobTitle>
           <CompanyName>{job.companyName}</CompanyName>
-            <LogoCompany src={job.urlCompanyLogo} />
+          <LogoCompany src={job.urlCompanyLogo} />
         </JobTitleNCompanyNameDiv>
         <JobDescriptionDiv>
           <div>

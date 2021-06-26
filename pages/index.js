@@ -1,5 +1,6 @@
 import SearchBar from "../src/components/SearchBar";
 import styled from "styled-components";
+import Head from 'next/head';
 
 import NavForFiltering from "../src/components/NavForFiltering";
 import JobAds from "../src/components/JobAds";
@@ -94,6 +95,9 @@ const JobAdsSection = styled.div`
 const HomePage = ({ jobAds }) => {
   return (
     <>
+      <Head>
+        <title>Ofertas de Trabajo en Argentina | Empleos Zonajobs.com.ar</title>
+      </Head>
       <SearchSectionImageBackground>
         <SearchSection>
           <SearchSectionMessage>Empleá tu pasión</SearchSectionMessage>
