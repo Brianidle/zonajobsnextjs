@@ -310,7 +310,6 @@ const FormularioGratis = () => {
                   name="urlCompanyLogo"
                   onChange={onChange}
                   value={inputValues.urlCompanyLogo ?? ""}
-                  required
                 ></Input>
               </div>
             </InputsGrid>
