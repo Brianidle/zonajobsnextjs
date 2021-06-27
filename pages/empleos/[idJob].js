@@ -110,17 +110,7 @@ const jobSalary = (salary) => {
   return salary ? salary : "No especificado";
 };
 
-export async function getStaticPaths() {
-  let jobAds = await getAllJobAds();
-
-  const paths = jobAds.map((jobAd) => ({
-    params: { idJob: jobAd._id },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   let job = await getJobAd(params.idJob);
 
   return { props: { job } };
