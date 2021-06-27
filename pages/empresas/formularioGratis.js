@@ -8,6 +8,9 @@ const CKEditor5 = dynamic(() => import("../../src/components/CKEditor5"), {
   ssr: false,
 });
 
+const maxNumberOfCharactersDescription = 3500;
+const maxNumberOfCharactersTitle = 100;
+
 const Header = styled.div`
   text-align: center;
 `;
@@ -29,6 +32,13 @@ const PublishAFreeAdTitle = styled.h1`
   font-size: 22px;
   color: #535151;
   margin: 0px;
+`;
+
+const NumberOfWords = styled.label`
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 14px;
 `;
 
 const FreeAdsAvailable = styled.span`
@@ -106,14 +116,23 @@ const FormularioGratis = () => {
   });
 
   const [salaryInputDisable, setSalaryInputDisable] = useState(false);
+  const [numberOfCharactersDescription, setNumberOfCharactersEditor] = useState(0);
 
   const onChange = (event) => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value });
   };
 
+  const onChangeTitle = (event) => {
+    setInputValues({ ...inputValues, title: event.target.value });
+  };
+
   const onChangeCKEditor = (ckeditorData) => {
     setInputValues({ ...inputValues, [ckeditorData.name]: ckeditorData.data });
   };
+
+  const verifyInput = () => {
+    return (inputValues.title.length <= maxNumberOfCharactersTitle) && (numberOfCharactersDescription <= maxNumberOfCharactersDescription);
+  }
 
   const router = useRouter();
 
@@ -132,36 +151,43 @@ const FormularioGratis = () => {
             onSubmit={(e) => {
               e.preventDefault();
 
-              fetch("http://localhost:4862/jobAd", {
-                method: "post",
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(inputValues),
-              })
-                .then((response) => response.json())
-                .then((data) => console.log(data));
-              router.push("/");
+              if (verifyInput()) {
+                fetch("http://localhost:4862/jobAd", {
+                  method: "post",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(inputValues),
+                })
+                  .then((response) => response.json())
+                  .then((data) => console.log(data));
+
+                router.push("/");
+              }
             }}
           >
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "20px", position: "relative" }}>
               <InputDescription htmlFor="title">
                 Puesto / Título del aviso
               </InputDescription>
               <Input
                 id="title"
                 name="title"
-                onChange={onChange}
+                type="text"
+                onChange={onChangeTitle}
                 value={inputValues.title ?? ""}
+                maxLength={maxNumberOfCharactersTitle}
                 required
-              ></Input>
+              >
+              </Input>
+              <NumberOfWords>{inputValues.title.length}/{maxNumberOfCharactersTitle}</NumberOfWords>
             </div>
             <div style={{ marginBottom: "20px" }}>
               <InputDescription htmlFor="description">
                 Descripción del puesto
               </InputDescription>
-              <CKEditor5 name="description" onChange={onChangeCKEditor} />
+              <CKEditor5 name="description" onChange={onChangeCKEditor} maxNumberOfCharacters={maxNumberOfCharactersDescription} setNumberOfCharactersEditor={setNumberOfCharactersEditor} />
             </div>
             <InputsGrid>
               <div>
