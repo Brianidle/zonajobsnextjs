@@ -71,7 +71,7 @@ const JobDetailPage = ({ job }) => {
         <JobTitleNCompanyNameDiv>
           <JobTitle>{job.title}</JobTitle>
           <CompanyName>{job.companyName}</CompanyName>
-          <LogoCompany src={job.urlCompanyLogo} />
+          {job.urlCompanyLogo && <LogoCompany src={job.urlCompanyLogo} />}
         </JobTitleNCompanyNameDiv>
         <JobDescriptionDiv>
           <div>
