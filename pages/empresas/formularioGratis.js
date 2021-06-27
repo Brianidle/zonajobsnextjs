@@ -100,7 +100,7 @@ const PublishButton = styled.button`
   margin-top: 30px;
 `;
 
-const FormularioGratis = () => {
+const FormularioGratis = ({apiPath}) => {
   const [inputValues, setInputValues] = useState({
     title: "",
     description: "",
@@ -152,16 +152,14 @@ const FormularioGratis = () => {
               e.preventDefault();
 
               if (verifyInput()) {
-                fetch("http://localhost:4862/jobAd", {
+                fetch(apiPath + "/jobAd", {
                   method: "post",
                   headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                   },
                   body: JSON.stringify(inputValues),
-                })
-                  .then((response) => response.json())
-                  .then((data) => console.log(data));
+                });
 
                 router.push("/");
               }
@@ -322,5 +320,13 @@ const FormularioGratis = () => {
     </>
   );
 };
+
+export async function getStaticProps() {
+  let apiPath = process.env.API_PATH;
+
+  return {
+    props: { apiPath },
+  };
+}
 
 export default FormularioGratis;
