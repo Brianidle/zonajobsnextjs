@@ -85,6 +85,7 @@ const FeaturedJobsTitle = styled.label`
 
 const JobAdsSection = styled.div`
   margin-left: 15px;
+  margin-bottom: 40px;
 
   @media (max-width: 700px) {
     width: 100%;
@@ -123,7 +124,7 @@ const HomePage = ({ jobAds }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   let jobAds = await getFeaturedJobs();
 
   return {
