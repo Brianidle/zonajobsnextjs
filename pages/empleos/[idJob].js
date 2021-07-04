@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import moment from "moment";
 import parse from "html-react-parser";
+import { useRouter } from 'next/router';
 import Head from "next/head";
 
 import JobFeature from "../../src/components/JobFeature";
@@ -61,7 +62,36 @@ const JobDescription = styled.div`
   margin-top: 20px;
 `;
 
+const rotate = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
+const LoadingAnimationContainer = styled.div`
+  width: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const LoadingAnimation = styled.div`
+  border: 12px solid #fb9077;
+  border-radius: 50%;
+  border-top: 12px solid #5e61ca;
+  width: 60px;
+  height: 60px;
+  animation: ${rotate} 2s linear infinite;
+`;
+
 const JobDetailPage = ({ job }) => {
+
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <LoadingAnimationContainer><LoadingAnimation /></LoadingAnimationContainer>;
+  }
+
   return (
     <>
       <Head>
@@ -110,7 +140,17 @@ const jobSalary = (salary) => {
   return salary ? salary : "No especificado";
 };
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+  let jobAds = await getAllJobAds();
+
+  const paths = jobAds.map((jobAd) => ({
+    params: { idJob: jobAd._id },
+  }));
+
+  return { paths, fallback: true };
+}
+
+export async function getStaticProps({ params }) {
   let job = await getJobAd(params.idJob);
 
   return { props: { job } };
